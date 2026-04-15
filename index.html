@@ -3,95 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAPTURED BY KOHL | PORTFOLIO</title>
+    <title> KAYDEN KOHL | PHOTOGRAPHY </title>
     
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Outfit:wght@300;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
-        :root { 
-            --bg: #050505; 
-            --tiger: #ff6600; 
-            --white: #ffffff;
-            --border: rgba(255, 102, 0, 0.1); 
-        }
-
+        :root { --bg: #030303; --tiger: #ff6600; --white: #ffffff; --border: rgba(255, 102, 0, 0.15); }
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
         body { background: var(--bg); color: var(--white); font-family: 'Outfit', sans-serif; overflow-x: hidden; }
 
-        /* --- Custom Cursor --- */
-        #cursor { 
-            width: 12px; height: 12px; background: var(--white); border-radius: 50%; 
-            position: fixed; pointer-events: none; z-index: 10001; mix-blend-mode: difference;
-        }
-
-        /* --- Progress & Navigation --- */
-        #progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--tiger); width: 0%; z-index: 10002; }
+        /* UI Elements */
+        #cursor { width: 10px; height: 10px; background: var(--white); border-radius: 50%; position: fixed; pointer-events: none; z-index: 10001; mix-blend-mode: difference; }
+        #progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--tiger); width: 0%; z-index: 10002; }
         
-        nav {
-            position: fixed; top: 0; width: 100%; padding: 30px; display: flex;
-            justify-content: space-between; z-index: 1000; font-family: 'Syncopate'; font-size: 10px;
-            letter-spacing: 5px; mix-blend-mode: difference;
-        }
+        nav { position: fixed; top: 0; width: 100%; padding: 30px; display: flex; justify-content: space-between; z-index: 1000; font-family: 'Syncopate'; font-size: 10px; letter-spacing: 5px; }
 
-        /* --- Hero Section --- */
-        .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
-        .hero h1 { 
-            font-family: 'Syncopate'; font-size: clamp(4rem, 22vw, 18rem); 
-            line-height: 0.7; letter-spacing: -15px; text-transform: uppercase;
-        }
+        /* Hero */
+        .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .hero h1 { font-family: 'Syncopate'; font-size: clamp(3rem, 20vw, 15rem); line-height: 0.7; letter-spacing: -12px; }
         .hero h1 span { display: block; -webkit-text-stroke: 1px var(--white); color: transparent; }
-        .hero-tag { color: var(--tiger); letter-spacing: 20px; font-weight: 900; font-size: 10px; margin-bottom: 20px; opacity: 0.5; }
 
-        /* --- Gallery Section --- */
+        /* Gallery */
         .gallery-container { padding: 0 2vw 100px; }
         .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 15px; }
-
-        .card { 
-            grid-column: span 4; position: relative; height: 75vh; 
-            overflow: hidden; background: #000; border: 1px solid var(--border);
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-        }
+        .card { grid-column: span 4; position: relative; height: 70vh; overflow: hidden; border: 1px solid var(--border); background: #000; }
         .card.wide { grid-column: span 8; }
-        .card img { 
-            width: 100%; height: 120%; object-fit: cover; 
-            filter: grayscale(100%) brightness(0.3); transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        .card:hover img { filter: grayscale(0%) brightness(0.8); transform: scale(1.05); }
-
-        /* --- Media HUD --- */
-        .hud { 
-            position: absolute; inset: 0; display: flex; align-items: center; 
-            justify-content: center; opacity: 0; transition: 0.5s;
-        }
+        .card img { width: 100%; height: 130%; object-fit: cover; filter: grayscale(100%) brightness(0.3); transition: 1s ease; position: absolute; top: -15%; }
+        .card:hover img { filter: grayscale(0%) brightness(0.9); }
+        .hud { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.4s; background: rgba(0,0,0,0.4); }
         .card:hover .hud { opacity: 1; }
-        .hud-btn { 
-            background: transparent; color: #fff; border: 1px solid #fff; 
-            padding: 20px 40px; font-weight: 900; font-size: 10px; 
-            letter-spacing: 5px; backdrop-filter: blur(5px);
-        }
+        .hud-btn { background: #fff; color: #000; border: none; padding: 15px 30px; font-weight: 900; font-size: 10px; letter-spacing: 3px; }
 
-        /* --- Contact Dock --- */
-        .contact-dock {
-            position: fixed; bottom: 40px; right: 40px; z-index: 5000;
-            display: flex; flex-direction: column; align-items: flex-end; gap: 15px;
-        }
-        .dock-item {
-            font-family: 'Syncopate'; font-size: 9px; color: var(--white);
-            text-decoration: none; padding: 10px 20px; border: 1px solid var(--border);
-            background: rgba(0,0,0,0.8); transition: 0.3s; letter-spacing: 2px;
-        }
+        /* Contact Dock */
+        .contact-dock { position: fixed; bottom: 30px; right: 30px; z-index: 5000; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+        .dock-item { font-family: 'Syncopate'; font-size: 8px; color: var(--white); text-decoration: none; padding: 12px 20px; border: 1px solid var(--border); background: rgba(0,0,0,0.9); transition: 0.3s; letter-spacing: 2px; }
         .dock-item:hover { background: var(--tiger); color: #000; border-color: var(--tiger); }
 
-        /* --- Hidden Admin --- */
-        #admin-panel {
-            position: fixed; left: -400px; top: 0; width: 350px; height: 100vh;
-            background: #000; border-right: 1px solid var(--tiger); z-index: 9999;
-            padding: 40px; transition: 0.5s ease;
-        }
+        /* ADMIN SYSTEM */
+        #admin-panel { position: fixed; left: -420px; top: 0; width: 400px; height: 100vh; background: #080808; border-right: 2px solid var(--tiger); z-index: 9999; padding: 50px 30px; transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1); box-shadow: 20px 0 50px rgba(0,0,0,0.9); }
         #admin-panel.open { left: 0; }
-        .admin-input { width: 100%; background: #111; border: 1px solid #222; padding: 15px; color: var(--tiger); margin: 20px 0; }
+        .admin-input { width: 100%; background: #000; border: 1px solid #222; padding: 15px; color: var(--tiger); font-family: 'Outfit'; margin: 20px 0; font-size: 12px; line-height: 1.6; }
+        .admin-btn { width: 100%; padding: 20px; background: var(--tiger); border: none; font-weight: 900; letter-spacing: 2px; color: #000; cursor: pointer; text-transform: uppercase; }
 
         @media (max-width: 900px) { .card { grid-column: span 12 !important; height: 50vh !important; } }
     </style>
@@ -102,18 +56,20 @@
     <div id="cursor"></div>
 
     <nav>
-        <div>SYSTEM // 2026</div>
-        <div style="color: var(--tiger);">CAPTURED BY KOHL</div>
+        <div style="color: var(--tiger);">KOHL MEDIA</div>
+        <div>UNIT_02</div>
     </nav>
 
     <div id="admin-panel">
-        <h2 style="font-family: 'Syncopate'; font-size: 12px; color: var(--tiger);">DATALINK</h2>
-        <textarea id="id-input" class="admin-input" rows="10" placeholder="IMGUR_IDS_HERE"></textarea>
-        <button onclick="saveGallery()" style="width:100%; padding:15px; background:var(--tiger); border:none; font-weight:900;">PUSH UPDATE</button>
+        <h2 style="font-family: 'Syncopate'; font-size: 14px; color: var(--tiger);">DATALINK CONSOLE</h2>
+        <p style="font-size: 10px; color: #555; margin-top: 10px;">PASTE CODES (CODE1, CODE2, CODE3)</p>
+        <textarea id="id-input" class="admin-input" rows="12" placeholder="OqzVh2F, 2EU5WgG..."></textarea>
+        <button class="admin-btn" onclick="saveGallery()">PUSH TO ARCHIVE</button>
+        <p id="admin-status" style="font-size: 9px; margin-top: 15px; text-align: center; color: var(--tiger);"></p>
     </div>
 
     <section class="hero">
-        <div class="hero-tag">MASSILLON / PHOTOGRAPHY </div>
+        <p style="letter-spacing: 15px; font-size: 10px; color: var(--tiger); margin-bottom: 20px;">EST. 2026 // MASSILLON</p>
         <h1>KAYDEN<span>KOHL</span></h1>
     </section>
 
@@ -122,51 +78,63 @@
     </div>
 
     <div class="contact-dock">
-        <a href="tel:3303231495" class="dock-item" onmouseover="playHover()">330.323.1495</a>
-        <a href="mailto:framedbykohl@gmail.com" class="dock-item" onmouseover="playHover()">FRAMEDBYKOHL@GMAIL.COM</a>
-        <a href="https://instagram.com/capturedbykohl" target="_blank" class="dock-item" onmouseover="playHover()">@CAPTUREDBYKOHL</a>
+        <a href="tel:3303231495" class="dock-item">330.323.1495</a>
+        <a href="mailto:framedbykohl@gmail.com" class="dock-item">FRAMEDBYKOHL@GMAIL.COM</a>
+        <a href="https://instagram.com/capturedbykohl" target="_blank" class="dock-item">@CAPTUREDBYKOHL</a>
     </div>
 
     <script>
-        // --- AUDIO ENGINE ---
-        const hoverSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'); // Light click
-        const clickSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'); // Mechanical Shutter
-        hoverSound.volume = 0.2;
-        clickSound.volume = 0.5;
+        // --- SOUNDS ---
+        const clickSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3');
+        clickSfx.volume = 0.4;
 
-        function playHover() { hoverSound.currentTime = 0; hoverSound.play(); }
-        function playClick() { clickSound.currentTime = 0; clickSound.play(); }
-
-        // --- DATA ENGINE ---
-        const baseIDs = ['OqzVh2F', '2EU5WgG', 'OlaYTOm', 'BdDiI73', 'nTI0UpG', 'l8KtKwq', 'XqUUO8H', 'IpBX3PV', '1JT7O0L', 'jiDUMAV', 'kR797z7', 'n1xbiVG', 'Wy06l2G', 'u4VKTTW', 'VbnLz6J', 'C2vnNeA', 'FZQaapc', 'dGx0YcH', 'XYdhz7D', 'Za82bCB', 'tePEZC8', 'X0cxaz9', 'PHBCWBL', 'P9ugqSs', 'stsJb5o', 'ifpMQG3', '9m4qjNO'];
-        let activeIDs = JSON.parse(localStorage.getItem('specter_cache')) || baseIDs;
+        // --- DATABASE ---
+        const initialIDs = ['OqzVh2F', '2EU5WgG', 'OlaYTOm', 'BdDiI73', 'nTI0UpG', 'l8KtKwq', 'XqUUO8H', 'IpBX3PV', '1JT7O0L', 'jiDUMAV', 'kR797z7', 'n1xbiVG', 'Wy06l2G', 'u4VKTTW', 'VbnLz6J', 'C2vnNeA', 'FZQaapc', 'dGx0YcH', 'XYdhz7D', 'Za82bCB', 'tePEZC8', 'X0cxaz9', 'PHBCWBL', 'P9ugqSs', 'stsJb5o', 'ifpMQG3', '9m4qjNO'];
+        
+        let activeIDs = JSON.parse(localStorage.getItem('kohl_specter_v2')) || initialIDs;
 
         function buildGrid() {
             const grid = document.getElementById('main-grid');
             grid.innerHTML = '';
             activeIDs.forEach((id, i) => {
+                if(!id) return;
                 const card = document.createElement('div');
                 const url = `https://i.imgur.com/${id.trim()}.jpeg`;
                 card.className = `card ${i % 7 === 0 ? 'wide' : ''}`;
-                card.innerHTML = `<img src="${url}" onmouseover="playHover()"><div class="hud"><button class="hud-btn" onclick="playClick(); window.open('${url}','_blank')">OPEN_FILE</button></div>`;
+                card.innerHTML = `<img src="${url}"><div class="hud"><button class="hud-btn" onclick="window.open('${url}','_blank')">OPEN_FILE</button></div>`;
                 grid.appendChild(card);
             });
             initParallax();
         }
 
-        // --- INTERFACE ---
-        window.addEventListener('keydown', e => { if(e.key.toLowerCase() === 'l') document.getElementById('admin-panel').classList.toggle('open'); });
-        
+        // --- ADMIN ACTIONS ---
         function saveGallery() {
             const val = document.getElementById('id-input').value;
+            const status = document.getElementById('admin-status');
+            
             if(val) {
-                activeIDs = [...val.split(','), ...activeIDs];
-                localStorage.setItem('specter_cache', JSON.stringify(activeIDs));
-                buildGrid();
-                playClick();
+                const newArray = val.split(',').map(item => item.trim()).filter(item => item !== "");
+                activeIDs = [...newArray, ...activeIDs];
+                
+                try {
+                    localStorage.setItem('kohl_specter_v2', JSON.stringify(activeIDs));
+                    status.innerText = "PUSH SUCCESSFUL. RELOADING...";
+                    clickSfx.play();
+                    setTimeout(() => { location.reload(); }, 1000);
+                } catch (e) {
+                    status.innerText = "LOCAL STORAGE FULL. COPY YOUR IDS MANUALLY.";
+                }
             }
         }
 
+        // Toggle Console
+        window.addEventListener('keydown', e => {
+            if(e.key.toLowerCase() === 'l') {
+                document.getElementById('admin-panel').classList.toggle('open');
+            }
+        });
+
+        // --- MOTION ENGINE ---
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
             gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
@@ -184,10 +152,9 @@
             });
         }
 
-        // Silent Errors
-        window.onerror = () => true;
-
+        // Initialize
         buildGrid();
+        window.onerror = () => true;
     </script>
 </body>
 </html>
