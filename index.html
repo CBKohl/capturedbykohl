@@ -57,7 +57,7 @@
 
     <nav>
         <div style="color: var(--tiger);">KOHL MEDIA</div>
-        <div>UNIT_02</div>
+        <div>CBK</div>
     </nav>
 
     <div id="admin-panel">
@@ -101,7 +101,7 @@
                 const card = document.createElement('div');
                 const url = `https://i.imgur.com/${id.trim()}.jpeg`;
                 card.className = `card ${i % 7 === 0 ? 'wide' : ''}`;
-                card.innerHTML = `<img src="${url}"><div class="hud"><button class="hud-btn" onclick="window.open('${url}','_blank')">OPEN_FILE</button></div>`;
+                card.innerHTML = `<img src="${url}"><div class="hud"><button class="hud-btn" onclick="window.open('${url}','_blank')">OPEN</button></div>`;
                 grid.appendChild(card);
             });
             initParallax();
